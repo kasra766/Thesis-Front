@@ -1,5 +1,6 @@
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { Toaster } from "sonner";
+import "@/app/globals.css";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReactQueryProvider>
-          {children}
+          <div className="min-h-dvh w-full">{children}</div>
           <Toaster richColors />
         </ReactQueryProvider>
       </body>

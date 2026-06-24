@@ -13,15 +13,16 @@ export function useLogin() {
     mutationFn: authService.login,
 
     onSuccess: (data) => {
-      setAuth(data.accessToken);
+      console.log(data);
+      setAuth(data.access_token);
 
       toast.success("Login successful");
 
       router.push("/products");
     },
 
-    onError: () => {
-      toast.error("Invalid credentials");
+    onError: (e) => {
+      toast.error(e.message || "Invalid credentials");
     },
   });
 }

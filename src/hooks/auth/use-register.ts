@@ -14,7 +14,7 @@ export function useRegister() {
     onSuccess: () => {
       toast.success("Account created");
 
-      router.push("/login");
+      router.push(`/login`);
     },
 
     onError: () => {
