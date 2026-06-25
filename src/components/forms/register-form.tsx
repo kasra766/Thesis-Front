@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { registerSchema } from "@/schema/register.schema";
+import { registerSchema } from "@/schemas/register.schema";
 import { useRegister } from "@/hooks/auth/use-register";
 import { Input } from "../ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
