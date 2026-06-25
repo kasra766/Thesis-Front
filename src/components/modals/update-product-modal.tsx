@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ProductForm } from "../forms/product-from";
+import { ProductForm } from "../forms/product-form";
 import { ProductFormValues } from "@/schemas/product.schema";
 import { useState } from "react";
 import { Product } from "@/types/product";
@@ -31,9 +31,7 @@ export function UpdateProductModal(props: IProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
-            Update Product
-        </Button>
+        <Button>Update Product</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>

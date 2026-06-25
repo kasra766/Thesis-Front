@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ProductForm } from "../forms/product-from";
+import { ProductForm } from "../forms/product-form";
 import { useCreateProduct } from "@/hooks/products/use-create-product";
 import { ProductFormValues } from "@/schemas/product.schema";
 import { useState } from "react";

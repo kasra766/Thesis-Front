@@ -1,4 +1,4 @@
-import { useDeleteProduct } from "@/hooks/products/use-delete-product";
+"use client";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -11,18 +11,19 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { useRouter } from "next/navigation";
+import { useDeleteOrder } from "@/hooks/orders/use-delete-order";
 
 interface IProps {
   id: string;
 }
 
-export function DeleteProductModal({ id }: IProps) {
+export function DeleteOrderModal({ id }: IProps) {
   const router = useRouter();
-  const deleteProduct = useDeleteProduct();
+  const deleteOrder = useDeleteOrder();
   const onDelete = () => {
-    deleteProduct.mutate(id, {
+    deleteOrder.mutate(id, {
       onSuccess: () => {
-        router.replace("/products");
+        router.replace("/orders");
       },
     });
   };
@@ -34,10 +35,10 @@ export function DeleteProductModal({ id }: IProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>Delete Product</DialogTitle>
+          <DialogTitle>Delete Order</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Are you sure you want to delete this product?
+          Are you sure you want to delete this order?
         </DialogDescription>
         <DialogFooter>
           <DialogClose asChild>
@@ -45,7 +46,7 @@ export function DeleteProductModal({ id }: IProps) {
           </DialogClose>
 
           <Button variant="destructive" onClick={onDelete}>
-            {deleteProduct.isPending ? "Deleting..." : "Delete"}
+            {deleteOrder.isPending ? "Deleting..." : "Delete"}
           </Button>
         </DialogFooter>
       </DialogContent>

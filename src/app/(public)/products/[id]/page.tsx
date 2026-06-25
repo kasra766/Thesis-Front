@@ -1,9 +1,10 @@
 "use client";
 
+import { CreateOrderModal } from "@/components/modals/create-order-modal";
 import { DeleteProductModal } from "@/components/modals/delete-product-modal";
 import { UpdateProductModal } from "@/components/modals/update-product-modal";
 import { useProduct } from "@/hooks/products/use-product";
-import { isAdmin } from "@/lib/auth";
+import { isAdmin, isAuthenticated } from "@/lib/auth";
 import { useParams } from "next/navigation";
 
 export default function ProductPage() {
@@ -24,6 +25,7 @@ export default function ProductPage() {
         <div className="flex gap-3 flex-col lg:flex-row">
           <UpdateProductModal {...data} />
           <DeleteProductModal id={data.id} />
+          {isAuthenticated() && <CreateOrderModal {...data} />}
         </div>
       )}
       <h1 className="text-4xl font-bold">{data.name}</h1>
