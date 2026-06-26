@@ -1,5 +1,4 @@
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useCallback } from "react";
 
 import { DEFAULT_PAGINATION } from "@/constants/pagination";
 
@@ -12,10 +11,10 @@ export const useHandlePagination = () => {
     "limit",
     parseAsInteger.withDefault(DEFAULT_PAGINATION.limit),
   );
-  const resetPagination = useCallback(() => {
+  const resetPagination = () => {
     setPage(null);
     setLimit(null);
-  }, []);
+  };
 
   return {
     page,
