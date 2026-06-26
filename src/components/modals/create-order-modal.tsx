@@ -38,7 +38,7 @@ export function CreateOrderModal({ id }: IProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" variant="outline" className="w-full lg:w-28">
+        <Button size="lg"  className="w-full">
           Create Order
         </Button>
       </DialogTrigger>

@@ -7,6 +7,11 @@ export interface Product {
   updatedAt: string;
 }
 
+export interface Products {
+  count: number;
+  data: Product[];
+}
+
 export interface CreateProductDto {
   name: string;
   description: string;

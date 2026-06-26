@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useUser } from "@/hooks/users/use-user";
+import dayjs from "dayjs";
 import { useParams } from "next/navigation";
 
 export default function UserPage() {
@@ -34,7 +35,7 @@ export default function UserPage() {
           <p className="font-bold">User #{data.id}</p>
           <p>Name: {data.name}</p>
           <p>Email: {data.email}</p>
-          <p>Created At: {data.createdAt}</p>
+          <p>Created At: {dayjs(data.createdAt).format("DD/MM/YYYY HH:mm")}</p>
         </CardContent>
         <CardFooter className="flex-col gap-2">
           <UpdateUserModal {...data} />

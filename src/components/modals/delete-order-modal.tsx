@@ -31,7 +31,9 @@ export function DeleteOrderModal({ id }: IProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="destructive">Delete</Button>
+        <Button variant="destructive" className="w-full">
+          Delete
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>

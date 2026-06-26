@@ -1,9 +1,12 @@
 import { api } from "@/lib/axios";
-import { CreateProductDto, Product, UpdateProductDto } from "@/types/product";
+import { CreateProductDto, Product, Products, UpdateProductDto } from "@/types/product";
+import { Pagination } from "@/types/shared";
 
 export const productService = {
-  async getProducts() {
-    const { data } = await api.get<Product[]>("/products");
+  async getProducts(params?: Pagination) {
+    const { data } = await api.get<Products>("/products", {
+      params,
+    });
 
     return data;
   },

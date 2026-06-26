@@ -1,11 +1,18 @@
 "use client";
-import { AdminGuard } from "@/components/guards/admin-guard";
+
 import { DeleteOrderModal } from "@/components/modals/delete-order-modal";
 import { UpdateOrderModal } from "@/components/modals/update-order-modal";
 import { useOrder } from "@/hooks/orders/use-order";
 import { useProduct } from "@/hooks/products/use-product";
 import { useParams } from "next/navigation";
-
+import dayjs from "dayjs";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 export default function MyOrderPage() {
   const { id } = useParams();
   const { data, isLoading } = useOrder((id as string) || "");
@@ -24,17 +31,24 @@ export default function MyOrderPage() {
   }
 
   return (
-    <AdminGuard>
-      <div className="container py-8 gap-4 flex flex-col">
-        <div className="flex gap-3 flex-col lg:flex-row">
+    <div className="container py-8 flex flex-col gap-4 items-center">
+      <Card className="w-full max-w-lg">
+        <CardHeader>
+          <CardTitle>Order info</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="font-bold">Order #{data.id}</p>
+          <p>Product: {productData?.name}</p>
+          <p>Quantity: {data.quantity}</p>
+          <p>Product Price: ${productData?.price}</p>
+          <p>Total Price: ${data.totalPrice}</p>
+          <p>Created at: {dayjs(data.createdAt).format("DD/MM/YYYY HH:mm")}</p>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
           <UpdateOrderModal {...data} />
           <DeleteOrderModal id={data.id} />
-        </div>
-
-        <h1 className="text-4xl font-bold">Order #{data.id}</h1>
-        <p className="mt-4">Product: {productData?.name}</p>
-        <p className="mt-4">Quantity: {data.quantity}</p>
-      </div>
-    </AdminGuard>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

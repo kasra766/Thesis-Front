@@ -1,6 +1,14 @@
 "use client";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useMyOrder } from "@/hooks/orders/use-my-order";
 import { useProduct } from "@/hooks/products/use-product";
+import dayjs from "dayjs";
 import { useParams } from "next/navigation";
 
 export default function MyOrderPage() {
@@ -21,14 +29,20 @@ export default function MyOrderPage() {
   }
 
   return (
-    <div className="container py-8 gap-4 flex flex-col">
-      <h1 className="text-4xl font-bold">Order #{data.id}</h1>
-
-      <p className="mt-4">Product: {productData?.name}</p>
-      <p className="mt-4">Product price: {productData?.price}</p>
-      <p className="mt-4">Quantity: {data.quantity}</p>
-      <p className="mt-4">Total Price: ${data.totalPrice}</p>
-      <p className="mt-4">Created At: {data.createdAt}</p>
+    <div className="container py-8 flex flex-col gap-4 items-center">
+      <Card className="w-full max-w-lg">
+        <CardHeader>
+          <CardTitle>Order info</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="font-bold">Order #{data.id}</p>
+          <p>Product: {productData?.name}</p>
+          <p>Quantity: {data.quantity}</p>
+          <p>Product Price: ${productData?.price}</p>
+          <p>Total Price: ${data.totalPrice}</p>
+          <p>Created at: {dayjs(data.createdAt).format("DD/MM/YYYY HH:mm")}</p>
+        </CardContent>
+      </Card>
     </div>
   );
 }

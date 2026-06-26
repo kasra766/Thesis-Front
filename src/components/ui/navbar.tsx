@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 interface MenuItem {
   title: string;
@@ -75,10 +76,12 @@ const Navbar = ({
           <div className="flex items-center gap-6">
             {/* Logo */}
             <Link href={logo?.url || "#"} className="flex items-center gap-2">
-              <img
-                src={logo?.src}
+              <Image
+                src={logo?.src || ""}
                 className="max-h-8 dark:invert"
-                alt={logo?.alt}
+                width={100}
+                height={100}
+                alt={logo?.alt || ""}
               />
               <span className="text-lg font-semibold tracking-tighter">
                 {logo?.title}
@@ -117,10 +120,12 @@ const Navbar = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href={logo?.url || "#"} className="flex items-center gap-2">
-              <img
-                src={logo?.src}
+              <Image
+                src={logo?.src || ""}
                 className="max-h-8 dark:invert"
-                alt={logo?.alt}
+                width={100}
+                height={100}
+                alt={logo?.alt || "Logo"}
               />
             </Link>
             <Sheet>
@@ -136,10 +141,12 @@ const Navbar = ({
                       href={logo?.url || "#"}
                       className="flex items-center gap-2"
                     >
-                      <img
-                        src={logo?.src}
+                      <Image
+                        src={logo?.src || ""}
                         className="max-h-8 dark:invert"
-                        alt={logo?.alt}
+                        width={100}
+                        height={100}
+                        alt={logo?.alt || ""}
                       />
                     </Link>
                   </SheetTitle>
@@ -200,10 +207,10 @@ const renderMenuItem = (item: MenuItem) => {
   return (
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
-        href={item.url}
+        asChild
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
-        {item.title}
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
@@ -226,15 +233,15 @@ const renderMobileMenuItem = (item: MenuItem) => {
   }
 
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
+    <Link key={item.title} href={item.url} className="text-md font-semibold">
       {item.title}
-    </a>
+    </Link>
   );
 };
 
 const SubMenuLink = ({ item }: { item: MenuItem }) => {
   return (
-    <a
+    <Link
       className="flex min-w-80 flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
       href={item.url}
     >
@@ -247,7 +254,7 @@ const SubMenuLink = ({ item }: { item: MenuItem }) => {
           </p>
         )}
       </div>
-    </a>
+    </Link>
   );
 };
 

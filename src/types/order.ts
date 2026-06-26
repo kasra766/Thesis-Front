@@ -8,6 +8,11 @@ export interface Order {
   updatedAt: string;
 }
 
+export interface Orders {
+  count: number;
+  data: Order[];
+}
+
 export interface CreateOrderDto {
   productId: string;
   quantity: number;

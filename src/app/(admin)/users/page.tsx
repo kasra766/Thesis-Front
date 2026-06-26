@@ -1,5 +1,6 @@
 "use client";
 
+import { CustomPagination } from "@/components/shared/custom-pagination";
 import {
   Table,
   TableBody,
@@ -9,11 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useHandlePagination } from "@/hooks/shared/use-handle-pagination";
 import { useUsers } from "@/hooks/users/use-users";
+import dayjs from "dayjs";
 import Link from "next/link";
 
 export default function UsersPage() {
-  const { data, isLoading } = useUsers();
+  const { page, limit, setPage } = useHandlePagination();
+  const { data, isLoading } = useUsers({ page, limit });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -35,13 +39,15 @@ export default function UsersPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((user) => (
+          {data.data.map((user) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">
                 <Link href={`/users/${user.id}`}>{user.name}</Link>
               </TableCell>
               <TableCell>{user.email}</TableCell>
-              <TableCell>{user.createdAt}</TableCell>
+              <TableCell>
+                {dayjs(user.createdAt).format("DD/MM/YYYY HH:mm")}
+              </TableCell>
               {/* <TableCell className="text-right">
               <TableActions {...user} />
               </TableCell> */}
@@ -49,6 +55,12 @@ export default function UsersPage() {
           ))}
         </TableBody>
       </Table>
+      <CustomPagination
+        totalItems={data.count}
+        itemsPerPage={limit}
+        setCurrentPage={setPage}
+        currentPage={page}
+      />
     </div>
   );
 }

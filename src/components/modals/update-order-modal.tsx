@@ -31,7 +31,7 @@ export function UpdateOrderModal({ id, quantity }: IProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" variant="outline" className="w-full lg:w-28">
+        <Button size="lg" variant="outline" className="w-full ">
           Update Order
         </Button>
       </DialogTrigger>

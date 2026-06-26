@@ -31,7 +31,9 @@ export function UpdateProductModal(props: IProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Update Product</Button>
+        <Button variant="outline" className="w-full">
+          Update Product
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>

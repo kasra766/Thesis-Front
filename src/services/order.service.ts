@@ -1,5 +1,6 @@
 import { api } from "@/lib/axios";
-import { CreateOrderDto, Order, UpdateOrderDto } from "@/types/order";
+import { CreateOrderDto, Order, Orders, UpdateOrderDto } from "@/types/order";
+import { Pagination } from "@/types/shared";
 
 export const orderService = {
   createOrder: async (dto: CreateOrderDto) => {
@@ -7,8 +8,10 @@ export const orderService = {
     return data;
   },
 
-  getMyOrders: async () => {
-    const { data } = await api.get<Order[]>("/orders/my");
+  getMyOrders: async (params?: Pagination) => {
+    const { data } = await api.get<Orders>("/orders/my", {
+      params,
+    });
     return data;
   },
 
@@ -17,8 +20,10 @@ export const orderService = {
     return data;
   },
 
-  getOrders: async () => {
-    const { data } = await api.get<Order[]>("/orders");
+  getOrders: async (params?: Pagination) => {
+    const { data } = await api.get<Orders>("/orders", {
+      params,
+    });
     return data;
   },
 
@@ -28,7 +33,7 @@ export const orderService = {
   },
 
   getUserOrders: async (userId: string) => {
-    const { data } = await api.get<Order[]>(`/orders/user/${userId}`);
+    const { data } = await api.get<Orders>(`/orders/user/${userId}`);
 
     return data;
   },

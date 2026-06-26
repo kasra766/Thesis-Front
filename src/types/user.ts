@@ -6,6 +6,11 @@ export interface User {
   updatedAt: string;
 }
 
+export interface Users{
+  count: number;
+  data: User[];
+}
+
 export interface UpdateUserDto {
   name?: string;
   email?: string;

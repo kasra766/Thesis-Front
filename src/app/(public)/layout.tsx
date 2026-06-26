@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/layout/app-header";
+import { Suspense } from "react";
 
 export default function PublicLayout({
   children,
@@ -7,8 +8,10 @@ export default function PublicLayout({
 }) {
   return (
     <div className="size-full flex flex-col justify-center items-center">
-      <AppHeader />
-      {children}
+      <Suspense fallback={<div>Loading...</div>}>
+        <AppHeader />
+        {children}
+      </Suspense>
     </div>
   );
 }
