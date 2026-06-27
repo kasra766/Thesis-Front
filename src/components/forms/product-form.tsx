@@ -90,8 +90,8 @@ export function ProductForm({ defaultValues, onSubmit, isLoading }: IProps) {
                   id="price"
                   aria-invalid={fieldState.invalid}
                   placeholder="100"
-                  type="number"
-                  autoComplete="price"
+                  // type="number"
+                  // autoComplete="price"
                 />
                 <InputGroupAddon align="inline-start">$</InputGroupAddon>
               </InputGroup>

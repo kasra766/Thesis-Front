@@ -3,7 +3,6 @@
 import { DeleteOrderModal } from "@/components/modals/delete-order-modal";
 import { UpdateOrderModal } from "@/components/modals/update-order-modal";
 import { useOrder } from "@/hooks/orders/use-order";
-import { useProduct } from "@/hooks/products/use-product";
 import { useParams } from "next/navigation";
 import dayjs from "dayjs";
 import {
@@ -13,16 +12,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 export default function MyOrderPage() {
   const { id } = useParams();
   const { data, isLoading } = useOrder((id as string) || "");
-  const { data: productData, isLoading: isLoadingProduct } = useProduct(
-    data?.productId || "",
-  );
 
-  const loading = isLoading || isLoadingProduct;
-
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -30,6 +25,8 @@ export default function MyOrderPage() {
     return <div>Order not found</div>;
   }
 
+  const productPrice = data.totalPrice / data.quantity;
+  
   return (
     <div className="container py-8 flex flex-col gap-4 items-center">
       <Card className="w-full max-w-lg">
@@ -38,14 +35,14 @@ export default function MyOrderPage() {
         </CardHeader>
         <CardContent>
           <p className="font-bold">Order #{data.id}</p>
-          <p>Product: {productData?.name}</p>
+
           <p>Quantity: {data.quantity}</p>
-          <p>Product Price: ${productData?.price}</p>
+          <p>Product Price: ${productPrice}</p>
           <p>Total Price: ${data.totalPrice}</p>
           <p>Created at: {dayjs(data.createdAt).format("DD/MM/YYYY HH:mm")}</p>
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <UpdateOrderModal {...data} />
+          <UpdateOrderModal {...data} productPrice={productPrice} />
           <DeleteOrderModal id={data.id} />
         </CardFooter>
       </Card>

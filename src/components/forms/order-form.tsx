@@ -36,7 +36,7 @@ export function OrderForm({ defaultValues, onSubmit, isLoading }: IProps) {
                 id="quantity"
                 aria-invalid={fieldState.invalid}
                 placeholder="Number of items"
-                type="number"
+                // type="number"
                 autoComplete="quantity"
               />
 

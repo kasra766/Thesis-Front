@@ -14,14 +14,18 @@ import { OrderForm } from "../forms/order-form";
 import { useUpdateOrder } from "@/hooks/orders/use-update-order";
 import { Order } from "@/types/order";
 
-type IProps = Order;
+type IProps = Order & { productPrice: number };
 
-export function UpdateOrderModal({ id, quantity }: IProps) {
+export function UpdateOrderModal({ id, quantity, productPrice }: IProps) {
   const updateOrder = useUpdateOrder(id);
   const [open, setOpen] = useState(false);
 
   const onSubmit = (data: CreateOrderValues) => {
-    updateOrder.mutate(data.quantity, {
+    const dto = {
+      quantity: data.quantity,
+      totalPrice: data.quantity * productPrice,
+    };
+    updateOrder.mutate(dto, {
       onSuccess: () => {
         setOpen(false);
       },

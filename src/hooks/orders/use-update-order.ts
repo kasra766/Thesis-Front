@@ -9,10 +9,8 @@ export function useUpdateOrder(id: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (quantity: number) =>
-      orderService.updateOrder(id, {
-        quantity,
-      }),
+    mutationFn: (data: { quantity: number; totalPrice: number }) =>
+      orderService.updateOrder(id, data),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
