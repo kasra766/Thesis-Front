@@ -1,3 +1,6 @@
+"use client";
+// back end is not ready yet
+
 import { queryKeys } from "@/lib/query-keys";
 import { orderService } from "@/services/order.service";
 import { useQuery } from "@tanstack/react-query";

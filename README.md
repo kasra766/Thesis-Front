@@ -1,36 +1,276 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thesis Frontend
 
-## Getting Started
+A modern frontend application built with **Next.js 16**, **React**, **TypeScript**, and **Shadcn UI** for a microservices-based e-commerce system.
 
-First, run the development server:
+The application communicates exclusively with an API Gateway and provides authentication, product management, order management, and user management with role-based authorization.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+# Features
+
+## Authentication
+
+* User registration
+* User login
+* JWT-based authentication
+* Automatic Authorization header injection using Axios interceptors
+* Role-based access control (USER / ADMIN)
+
+## Products
+
+* Public product listing
+* Product details
+* Create product (Admin)
+* Update product (Admin)
+* Delete product (Admin)
+
+## Orders
+
+### User
+
+* Create order
+* View personal orders
+* View order details
+
+### Administrator
+
+* View all orders
+* View order details
+* Update order quantity
+
+## Users (Administrator)
+
+* View all users
+* View user details
+* Update user information
+* Delete user
+* View a specific user's orders
+
+---
+
+# Tech Stack
+
+## Framework
+
+* Next.js 16 (App Router)
+
+## Language
+
+* TypeScript
+
+## UI
+
+* Shadcn UI
+* Tailwind CSS
+* Lucide React
+
+## State Management
+
+* TanStack React Query
+
+## Forms & Validation
+
+* React Hook Form
+* Zod
+
+## HTTP Client
+
+* Axios
+
+## Notifications
+
+* Sonner
+
+## Containerization
+
+* Docker
+* Docker Compose
+
+---
+
+# Project Structure
+
+```text
+src/
+├── app/
+├── components/
+│   ├── forms/
+│   ├── guards/
+│   ├── layout/
+│   ├── modals/
+│   ├── shared/
+│   └── ui/
+├── constants/
+├── hooks/
+├── lib/
+├── providers/
+├── schemas/
+├── services/
+└── types/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses JWT authentication.
 
-## Learn More
+After a successful login:
 
-To learn more about Next.js, take a look at the following resources:
+1. The backend returns an access token.
+2. The access token is stored in Local Storage.
+3. Axios automatically attaches the token to authenticated requests.
+4. User role is determined by decoding the JWT payload.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Role-based layouts protect authenticated and administrator pages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# API Communication
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The frontend communicates only with the API Gateway.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+Frontend
+      │
+      ▼
+API Gateway
+      │
+ ┌────┴────┐
+ │         │
+Users   Products
+ │         │
+ └────┬────┘
+      │
+   Orders
+```
+
+No requests are sent directly to individual microservices.
+
+---
+
+# Environment Variables
+
+Create a `.env.local` file for local development.
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+---
+
+# Installation
+
+Clone the repository
+
+```bash
+git clone <repository-url>
+```
+
+Install dependencies
+
+```bash
+pnpm install
+```
+
+Run the development server
+
+```bash
+pnpm dev
+```
+
+The application will be available at:
+
+```
+http://localhost:3100
+```
+
+---
+
+# Production Build
+
+Build the application
+
+```bash
+pnpm build
+```
+
+Start the production server
+
+```bash
+pnpm start
+```
+
+---
+
+# Docker
+
+Build the Docker image
+
+```bash
+docker compose build
+```
+
+Run the application
+
+```bash
+docker compose up
+```
+
+The frontend will be available at
+
+```
+http://localhost:3100
+```
+
+---
+
+# Implemented Features
+
+* JWT Authentication
+* Role-based Authorization
+* Protected Routes
+* Public Product Catalog
+* Product CRUD
+* Order Management
+* User Management
+* Pagination
+* Form Validation
+* Loading Skeletons
+* Error States
+* Empty States
+* Toast Notifications
+* Responsive Design
+* Dockerized Deployment
+
+---
+
+# Development Practices
+
+* Feature-based architecture
+* Reusable components
+* Type-safe API models
+* Centralized Axios configuration
+* Schema-based validation
+* React Query caching and mutations
+* Modular service layer
+* Production-ready Docker configuration
+
+---
+
+# Future Improvements
+
+* Refresh token authentication
+* HTTP-only cookie authentication
+* Image upload support
+* Search and filtering
+* Product categories
+* Unit and integration tests
+* GitHub Actions CI/CD
+* Internationalization (i18n)
+
+---
+
+# License
+
+This project was developed as part of a university thesis for educational purposes.
