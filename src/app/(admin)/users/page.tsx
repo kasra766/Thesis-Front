@@ -27,9 +27,9 @@ export default function UsersPage() {
     return <div>No data</div>;
   }
   return (
-    <div className="container py-8">
+       <div className="container py-8 flex flex-col gap-4">
       <Table>
-        <TableCaption>A list of users.</TableCaption>
+        <TableCaption>List of users</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>

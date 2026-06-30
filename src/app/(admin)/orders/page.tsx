@@ -7,8 +7,8 @@ import { useHandlePagination } from "@/hooks/shared/use-handle-pagination";
 import { CustomPagination } from "@/components/shared/custom-pagination";
 
 export default function OrdersPage() {
-  const {limit, setPage, page} = useHandlePagination();
-  const { data, isLoading } = useOrders({limit, page});
+  const { limit, setPage, page } = useHandlePagination();
+  const { data, isLoading } = useOrders({ limit, page });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -19,7 +19,7 @@ export default function OrdersPage() {
   }
 
   return (
-    <div className="container py-8">
+    <div className="container py-8 flex flex-col gap-4">
       <h1 className="text-3xl font-bold">Orders</h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
